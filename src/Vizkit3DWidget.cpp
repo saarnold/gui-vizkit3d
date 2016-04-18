@@ -204,7 +204,7 @@ void Vizkit3DConfig::setCameraManipulator(QStringList const& manipulator)
     return getWidget()->setCameraManipulator(id);
 }
 
-Vizkit3DWidget::Vizkit3DWidget(QWidget* parent,const QString &world_name,bool auto_update)
+Vizkit3DWidget::Vizkit3DWidget(QWidget* parent,int width,int height,const QString &world_name,bool auto_update)
     : QMainWindow(parent)
     , env_plugin(NULL), clickHandler(new osgviz::ManipulationClickHandler),
     movedHandler(*this), movingHandler(*this), selectedHandler(*this)
@@ -219,7 +219,7 @@ Vizkit3DWidget::Vizkit3DWidget(QWidget* parent,const QString &world_name,bool au
 
     last_manipulator = vizkit3d::DEFAULT_MANIPULATOR;
     
-    graphicsWindowQt = createGraphicsWindow(0,0,800,600);
+    graphicsWindowQt = createGraphicsWindow(0,0,width,height);
     graphicsWindowQtgc = dynamic_cast<osg::GraphicsContext*>(graphicsWindowQt.get());
 
 
@@ -227,8 +227,8 @@ Vizkit3DWidget::Vizkit3DWidget(QWidget* parent,const QString &world_name,bool au
 
 
     osgviz::WindowConfig windowConfig;
-    windowConfig.width = 800;
-    windowConfig.height = 600;
+    windowConfig.width = width;
+    windowConfig.height = height;
     windowConfig.title = "rock-display";
 
 
